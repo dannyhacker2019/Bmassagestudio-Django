@@ -25,10 +25,10 @@ def appointment(request):
 
     if request.method == "POST":
         name = request.POST.get("name")
+        email = request.POST.get("email")
         phone = request.POST.get("phone")
         service = request.POST.get("service")
         date = request.POST.get("date")
-        message = request.POST.get("message", "")
 
         if not name or not phone:
             error = "Missing required fields"
@@ -40,10 +40,10 @@ def appointment(request):
                     subject="New Massage Booking Request 💆‍♀️",
                     html_content=f"""
                     <p>Name: {name}</p>
+                    <p>Email: {email}</p>
                     <p>Phone: {phone}</p>
                     <p>Service: {service}</p>
                     <p>Date: {date}</p>
-                    <p>Notes: {message}</p>
                     """
                 )
                 sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
