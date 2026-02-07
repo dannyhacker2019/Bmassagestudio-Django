@@ -20,6 +20,19 @@ SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDGRID_SENDER = os.getenv("SENDGRID_SENDER")
 SENDGRID_RECEIVER = os.getenv("SENDGRID_RECEIVER")
 
+# EMAIL SETTINGS (SendGrid)
+# ------------------------
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # SendGrid requires literally 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')  # from env
+DEFAULT_FROM_EMAIL = os.environ.get('SENDGRID_SENDER', '')
+SENDGRID_RECEIVER = os.environ.get('SENDGRID_RECEIVER', '')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
