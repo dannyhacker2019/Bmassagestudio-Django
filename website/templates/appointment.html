@@ -29,7 +29,7 @@
                 <div class="col-lg-6 py-5">
                     <div class="p-5 my-5" style="background: rgba(33, 30, 28, 0.7);">
                         <h1 class="text-white text-center mb-4">Make Appointment</h1>
-                        <form id="bookingForm" method="POST" action="{% url 'appointment' %}"></form>>
+                        <form id="bookingForm" method="POST" action="{% url 'appointment' %}"></form>
                              {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-sm-6">
@@ -74,7 +74,13 @@
                             </div>
                         </form> 
                         
-                        <div id="responseMessage"></div>
+                        <div id="responseMessage">
+                            {% if success %}
+                                <p style="color:green;">Booking sent successfully!</p>
+                            {% elif error %}
+                                <p style="color:red;">Error: {{ error }}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
