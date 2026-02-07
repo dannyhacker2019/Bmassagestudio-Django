@@ -29,7 +29,7 @@
                 <div class="col-lg-6 py-5">
                     <div class="p-5 my-5" style="background: rgba(33, 30, 28, 0.7);">
                         <h1 class="text-white text-center mb-4">Make Appointment</h1>
-                        <form id="bookingForm">
+                        <form id="bookingForm" method="POST" action="{% url 'appointment' %}"></form>>
                              {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-sm-6">
@@ -110,25 +110,4 @@
     </div>
     <!-- Open Hours End -->
 
-<script>
-const form = document.getElementById('bookingForm');
-form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const formData = new FormData(form);
-
-    const res = await fetch("{% url 'appointment' %}", {
-        method: "POST",
-        body: formData
-    });
-    const data = await res.json();
-    const msgDiv = document.getElementById('responseMessage');
-
-    if (data.status === 'success') {
-        msgDiv.innerHTML = '<p style="color:green;">Booking sent successfully!</p>';
-        form.reset();
-    } else {
-        msgDiv.innerHTML = `<p style="color:red;">Error: ${data.error || 'Try again'}</p>`;
-    }
-});
-</script>
     {% endblock %}
